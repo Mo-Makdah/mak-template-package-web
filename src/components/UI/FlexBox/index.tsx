@@ -1,7 +1,19 @@
 import { PropsWithChildren } from "react";
+import { TailwindColors } from "~/types/common-props.type";
 
-import resolveConfig from "tailwindcss/resolveConfig";
-// import tailwindConfig from "sr";
+const JUSTIFY = {
+  start: "justify-start",
+  center: "justify-center",
+  end: "justify-end",
+  between: "justify-between",
+  around: "justify-around",
+};
+
+const ALIGN = {
+  top: "align-top",
+  middle: "align-middle",
+  bottom: "align-bottom",
+};
 
 const FLEX_DIRECTION = {
   row: "flex-row",
@@ -15,54 +27,77 @@ const FLEX_WRAP = {
   wrap: "flex-wrap",
 };
 
-type JustifyContent =
-  | "flex-start"
-  | "center"
-  | "flex-end"
-  | "space-between"
-  | "space-around";
-type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
-type Cursor = "pointer" | "default";
+const CURSOR = {"pointer": "cursor-pointer" , "default": "cursor-default"};
 
 type Props = {
-  width?: string;
-  height?: string;
-  bgColor?: keyof Theme["colors"];
-  color?: keyof Theme["colors"];
-  padding?: string;
-  margin?: string;
-  borderRadius?: string;
-  maxWidth?: string;
-  maxHeight?: string;
-  border?: string;
-  cursor?: Cursor;
+  justify?: keyof typeof JUSTIFY;
+  align?: keyof typeof ALIGN;
+  flexDirection?: keyof typeof FLEX_DIRECTION;
+  flexWrap?: keyof typeof FLEX_WRAP;
+  gap?: string;
   fullFlex?: boolean;
   fullWidth?: boolean;
   fullHeight?: boolean;
-  flexDirection?: keyof typeof FLEX_DIRECTION;
-  flexWrap?: keyof typeof FLEX_WRAP;
-  justify?: JustifyContent;
-  align?: AlignItems;
-  gap?: string;
+  width?: string;
+  height?: string;
+  maxWidth?: string;
+  maxHeight?: string;
+  bgColor?: TailwindColors;
+  color?: TailwindColors;
+  padding?: string;
+  margin?: string;
+  borderRadius?: string;
+  border?: string;
+  cursor?: keyof typeof CURSOR;
 };
 
 export const FlexBox = ({
+  justify = "start",
+  align = "top",
+  flexDirection = "row",
+  flexWrap = "nowrap",
+  gap,
   fullFlex,
   fullWidth,
   fullHeight,
-  flexDirection = "row",
-  flexWrap = "nowrap",
+  width,
+  height,maxWidth,maxHeight,
+  bgColor,
+  color,padding,margin,border,borderRadius,cursor = "default",
   children,
 }: PropsWithChildren<Props>) => {
-  const fullFlexClass = fullFlex ? "flex-1" : undefined;
-  const fullWidthClass = fullWidth ? "w-full" : undefined;
-  const fullHeightClass = fullHeight ? "h-full" : undefined;
+  // Flex
+  const justifyClass = JUSTIFY[justify];
+  const alignClass = ALIGN[align];
   const flexDirectionClass = FLEX_DIRECTION[flexDirection];
   const flexWrapClass = FLEX_WRAP[flexWrap];
+  const gapClass = ;
+
+  // Sizes
+  const fullWidthClass = fullWidth ? "w-full" : "";
+  const fullHeightClass = fullHeight ? "h-full" : "";
+  const fullFlexClass = fullFlex ? "flex-1" : "";
+  const widthClass = ;
+  const heightClass = ;
+  const maxWidthClass = ;
+  const maxHeightClass = ;
+
+  // Colors
+  const bgColorClass = bgColor ? `bg-${bgColor}` : "";
+  const colorClass = color ? `text-${color}` : "";
+
+  // Box
+  const paddingClass = ;
+  const margingClass = ;
+  const borderClass = ;
+  const borderRadiusClass = ;
+
+  // Misc.
+  const cursorClass = CURSOR[cursor] ;
 
   return (
     <div
-      className={`flex ${fullFlexClass} ${fullWidthClass} ${fullHeightClass} ${flexDirectionClass} ${flexWrapClass} w-[5%]`}
+      className={`flex ${justifyClass} ${alignClass} ${flexDirectionClass} ${flexWrapClass} ${fullFlexClass} ${fullWidthClass} ${fullHeightClass} ${bgColorClass} ${colorClass} ${cursorClass} `}
     >
       {children}
     </div>

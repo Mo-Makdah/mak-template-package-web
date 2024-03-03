@@ -1,4 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+import { Config } from "tailwindcss";
+
+/** @type {Config} */
 export default {
   mode: "jit",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -16,12 +18,10 @@ export default {
         },
         black: "#000000",
         white: "#FFFFFF",
-      },
-      textColor: {
-        primary: "#252A34",
-        secondary: "#EAEAEA",
+        textPrimary: "#252A34",
+        textSecondary: "#252A34",
       },
     },
   },
   plugins: [],
-};
+} satisfies Config;
