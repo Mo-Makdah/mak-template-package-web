@@ -4,6 +4,8 @@ import {
   TailwindSize,
 } from "../../../types/tailwind-props.type";
 import { TAILWIND_SIZE_KEYS } from "../../../utils/constants/tailwind-values.utils";
+import { LiteralStringType } from "../../../types/common.type";
+import { isLiteralType } from "../../../utils/functions/isLiteralType.util";
 
 const JUSTIFY = {
   start: "justify-start",
@@ -41,8 +43,8 @@ type Props = {
   fullFlex?: boolean;
   fullWidth?: boolean;
   fullHeight?: boolean;
-  width?: TailwindSize | string;
-  height?: TailwindSize | string;
+  width?: TailwindSize | LiteralStringType;
+  height?: TailwindSize | LiteralStringType;
   bgColor?: TailwindColor;
   color?: TailwindColor;
   cursor?: keyof typeof CURSOR;
@@ -74,10 +76,10 @@ export const FlexBox = ({
   const fullWidthClass = fullWidth ? "w-full" : "";
   const fullHeightClass = fullHeight ? "h-full" : "";
   const fullFlexClass = fullFlex ? "flex-1" : "";
-  const widthClass = TAILWIND_SIZE_KEYS.includes(width as TailwindSize)
+  const widthClass = isLiteralType(width, TAILWIND_SIZE_KEYS)
     ? `w-${width}`
     : `w-[${width}]`;
-  const heightClass = TAILWIND_SIZE_KEYS.includes(height as TailwindSize)
+  const heightClass = isLiteralType(height, TAILWIND_SIZE_KEYS)
     ? `h-${height}`
     : `h-[${height}]`;
 
