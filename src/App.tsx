@@ -1,3 +1,5 @@
+import { FlexBox } from "./components/UI/FlexBox";
+
 function App() {
   return (
     <>
@@ -10,6 +12,8 @@ function App() {
       <div className="bg-gray-dark">Dark Grey</div>
       <div className="bg-black">Black</div>
       <div className="bg-white">White</div>
+
+      <FlexBox className=""></FlexBox>
     </>
   );
 }

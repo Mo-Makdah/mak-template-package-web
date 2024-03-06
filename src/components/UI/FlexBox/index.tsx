@@ -1,5 +1,6 @@
-import { PropsWithChildren } from "react";
-import { TailwindColors } from "~/types/common-props.type";
+import { HTMLAttributes, PropsWithChildren } from "react";
+import { TailwindColor, TailwindSize } from "~/types/tailwind-props.type";
+import { TAILWIND_SIZE_KEYS } from "~/utils/constants/tailwind-values.utils";
 
 const JUSTIFY = {
   start: "justify-start",
@@ -27,43 +28,37 @@ const FLEX_WRAP = {
   wrap: "flex-wrap",
 };
 
-const CURSOR = {"pointer": "cursor-pointer" , "default": "cursor-default"};
+const CURSOR = { pointer: "cursor-pointer", default: "cursor-default" };
 
 type Props = {
   justify?: keyof typeof JUSTIFY;
   align?: keyof typeof ALIGN;
   flexDirection?: keyof typeof FLEX_DIRECTION;
   flexWrap?: keyof typeof FLEX_WRAP;
-  gap?: string;
   fullFlex?: boolean;
   fullWidth?: boolean;
   fullHeight?: boolean;
-  width?: string;
-  height?: string;
-  maxWidth?: string;
-  maxHeight?: string;
-  bgColor?: TailwindColors;
-  color?: TailwindColors;
-  padding?: string;
-  margin?: string;
-  borderRadius?: string;
-  border?: string;
+  width?: TailwindSize | string;
+  height?: TailwindSize | string;
+  bgColor?: TailwindColor;
+  color?: TailwindColor;
   cursor?: keyof typeof CURSOR;
-};
+} & HTMLAttributes<HTMLDivElement>;
 
 export const FlexBox = ({
   justify = "start",
   align = "top",
   flexDirection = "row",
   flexWrap = "nowrap",
-  gap,
   fullFlex,
   fullWidth,
   fullHeight,
-  width,
-  height,maxWidth,maxHeight,
+  width = "auto",
+  height = "auto",
   bgColor,
-  color,padding,margin,border,borderRadius,cursor = "default",
+  color,
+  cursor = "default",
+  className,
   children,
 }: PropsWithChildren<Props>) => {
   // Flex
@@ -71,33 +66,28 @@ export const FlexBox = ({
   const alignClass = ALIGN[align];
   const flexDirectionClass = FLEX_DIRECTION[flexDirection];
   const flexWrapClass = FLEX_WRAP[flexWrap];
-  const gapClass = ;
 
   // Sizes
   const fullWidthClass = fullWidth ? "w-full" : "";
   const fullHeightClass = fullHeight ? "h-full" : "";
   const fullFlexClass = fullFlex ? "flex-1" : "";
-  const widthClass = ;
-  const heightClass = ;
-  const maxWidthClass = ;
-  const maxHeightClass = ;
+  const widthClass = TAILWIND_SIZE_KEYS.includes(width as TailwindSize)
+    ? `w-${width}`
+    : `w-[${width}]`;
+  const heightClass = TAILWIND_SIZE_KEYS.includes(height as TailwindSize)
+    ? `h-${height}`
+    : `h-[${height}]`;
 
   // Colors
   const bgColorClass = bgColor ? `bg-${bgColor}` : "";
   const colorClass = color ? `text-${color}` : "";
 
-  // Box
-  const paddingClass = ;
-  const margingClass = ;
-  const borderClass = ;
-  const borderRadiusClass = ;
-
   // Misc.
-  const cursorClass = CURSOR[cursor] ;
+  const cursorClass = CURSOR[cursor];
 
   return (
     <div
-      className={`flex ${justifyClass} ${alignClass} ${flexDirectionClass} ${flexWrapClass} ${fullFlexClass} ${fullWidthClass} ${fullHeightClass} ${bgColorClass} ${colorClass} ${cursorClass} `}
+      className={`flex ${justifyClass} ${alignClass} ${flexDirectionClass} ${flexWrapClass} ${fullFlexClass} ${widthClass} ${heightClass} ${fullWidthClass} ${fullHeightClass} ${bgColorClass} ${colorClass} ${cursorClass} ${className}`}
     >
       {children}
     </div>
