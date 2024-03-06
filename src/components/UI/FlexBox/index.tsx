@@ -1,6 +1,9 @@
 import { HTMLAttributes, PropsWithChildren } from "react";
-import { TailwindColor, TailwindSize } from "~/types/tailwind-props.type";
-import { TAILWIND_SIZE_KEYS } from "~/utils/constants/tailwind-values.utils";
+import {
+  TailwindColor,
+  TailwindSize,
+} from "../../../types/tailwind-props.type";
+import { TAILWIND_SIZE_KEYS } from "../../../utils/constants/tailwind-values.utils";
 
 const JUSTIFY = {
   start: "justify-start",

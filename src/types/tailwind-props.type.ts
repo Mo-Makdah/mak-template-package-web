@@ -1,6 +1,6 @@
 import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "tailwind.config";
-import { TAILWIND_SIZE_KEYS } from "~/utils/constants/tailwind-values.utils";
+import tailwindConfig from "../../tailwind.config";
+import { TAILWIND_SIZE_KEYS } from "../utils/constants/tailwind-values.utils";
 
 const tailwind = resolveConfig(tailwindConfig);
 
