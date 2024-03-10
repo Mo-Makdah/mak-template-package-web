@@ -5,7 +5,7 @@ import {
 } from "../../../types/tailwind-props.type";
 import { TAILWIND_SIZE_KEYS } from "../../../utils/constants/tailwind-values.utils";
 import { LiteralStringType } from "../../../types/common.type";
-import { isLiteralType } from "../../../utils/functions/isLiteralType.util";
+import { isLiteralType } from "../../../utils/functions/type-cheks.util";
 
 const JUSTIFY = {
   start: "justify-start",
